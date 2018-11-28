@@ -1,8 +1,6 @@
 import org.apache.ignite.cache.affinity.AffinityKeyMapped;
 import org.apache.ignite.cache.query.annotations.QuerySqlField;
 
-import java.math.BigDecimal;
-
 public class CUSTOMER {
 
     @AffinityKeyMapped      //Collocated to Orders
@@ -17,14 +15,14 @@ public class CUSTOMER {
     @QuerySqlField
     private String C_PHONE;
     @QuerySqlField
-    private BigDecimal C_ACCTBAL;
+    private Double C_ACCTBAL;
     @QuerySqlField
     private String C_MKTSEGMENT;
     @QuerySqlField
     private String C_COMMENT;
 
     public CUSTOMER(Integer c_CUSTKEY, String c_NAME, String c_ADDRESS, Integer c_NATIONKEY, String c_PHONE,
-                    BigDecimal c_ACCTBAL, String c_MKTSEGMENT, String c_COMMENT) {
+                    Double c_ACCTBAL, String c_MKTSEGMENT, String c_COMMENT) {
         C_CUSTKEY = c_CUSTKEY;
         C_NAME = c_NAME;
         C_ADDRESS = c_ADDRESS;
@@ -76,11 +74,11 @@ public class CUSTOMER {
         C_PHONE = c_PHONE;
     }
 
-    public BigDecimal getC_ACCTBAL() {
+    public Double getC_ACCTBAL() {
         return C_ACCTBAL;
     }
 
-    public void setC_ACCTBAL(BigDecimal c_ACCTBAL) {
+    public void setC_ACCTBAL(Double c_ACCTBAL) {
         C_ACCTBAL = c_ACCTBAL;
     }
 

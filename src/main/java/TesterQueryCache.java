@@ -62,6 +62,7 @@ public class TesterQueryCache {
         // Ignite Configuration
         IgniteConfiguration cfg = new IgniteConfiguration();
         cfg.setClientMode(true);
+        cfg.setPeerClassLoadingEnabled(true);
         cfg.setDiscoverySpi(spi);
 
 
@@ -87,7 +88,7 @@ public class TesterQueryCache {
 //            }
 
             partCache.put(14, new PART(14, "name", "mfgr", "brand",
-                    "type", 100, "container", new BigDecimal(1234567.45),
+                    "type", 100, "container", new Double(1234567.45),
                     "comment"));
 
             QueryCursor<List<?>> cursor = partCache.query(new SqlFieldsQuery("SELECT * FROM PART, CUSTOMER"));
@@ -97,6 +98,8 @@ public class TesterQueryCache {
                 }
                 System.out.println();
             }
+
+            partCache.remove(14);
 
         } catch (ClientException e) {
             e.printStackTrace();

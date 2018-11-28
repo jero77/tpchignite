@@ -7,6 +7,7 @@ public class NATION {
     private Integer N_NATIONKEY;        //PK
     @QuerySqlField
     private String N_NAME;
+    @AffinityKeyMapped      // collocated to REGION
     @QuerySqlField
     private Integer N_REGIONKEY;        //FK
     @QuerySqlField

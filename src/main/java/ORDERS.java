@@ -1,8 +1,7 @@
 import org.apache.ignite.cache.affinity.AffinityKeyMapped;
 import org.apache.ignite.cache.query.annotations.QuerySqlField;
 
-import java.math.BigDecimal;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ORDERS {
 
@@ -14,9 +13,9 @@ public class ORDERS {
     @QuerySqlField
     private String O_ORDERSTATUS;
     @QuerySqlField
-    private BigDecimal O_TOTALPRICE;
+    private Double O_TOTALPRICE;
     @QuerySqlField
-    private Date O_ORDERDATE;
+    private Timestamp O_ORDERDATE;
     @QuerySqlField
     private String O_ORDERPRIORITY;
     @QuerySqlField
@@ -27,7 +26,7 @@ public class ORDERS {
     private String O_COMMENT;
 
 
-    public ORDERS(Integer o_ORDERKEY, Integer o_CUSTKEY, String o_ORDERSTATUS, BigDecimal o_TOTALPRICE, Date o_ORDERDATE,
+    public ORDERS(Integer o_ORDERKEY, Integer o_CUSTKEY, String o_ORDERSTATUS, Double o_TOTALPRICE, Timestamp o_ORDERDATE,
                   String o_ORDERPRIORITY, String o_CLERK, Integer o_SHIPPRIORITY, String o_COMMENT) {
         O_ORDERKEY = o_ORDERKEY;
         O_CUSTKEY = o_CUSTKEY;
@@ -65,19 +64,19 @@ public class ORDERS {
         O_ORDERSTATUS = o_ORDERSTATUS;
     }
 
-    public BigDecimal getO_TOTALPRICE() {
+    public Double getO_TOTALPRICE() {
         return O_TOTALPRICE;
     }
 
-    public void setO_TOTALPRICE(BigDecimal o_TOTALPRICE) {
+    public void setO_TOTALPRICE(Double o_TOTALPRICE) {
         O_TOTALPRICE = o_TOTALPRICE;
     }
 
-    public Date getO_ORDERDATE() {
+    public Timestamp getO_ORDERDATE() {
         return O_ORDERDATE;
     }
 
-    public void setO_ORDERDATE(Date o_ORDERDATE) {
+    public void setO_ORDERDATE(Timestamp o_ORDERDATE) {
         O_ORDERDATE = o_ORDERDATE;
     }
 

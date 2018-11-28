@@ -1,8 +1,6 @@
 import org.apache.ignite.cache.affinity.AffinityKeyMapped;
 import org.apache.ignite.cache.query.annotations.QuerySqlField;
 
-import java.math.BigDecimal;
-
 public class SUPPLIER {
 
     @AffinityKeyMapped      // Supplier collocated to Partsupp
@@ -17,12 +15,12 @@ public class SUPPLIER {
     @QuerySqlField
     private String S_PHONE;
     @QuerySqlField
-    private BigDecimal S_ACCTBAL;
+    private Double S_ACCTBAL;
     @QuerySqlField
     private String S_COMMENT;
 
     public SUPPLIER(Integer s_SUPPKEY, String s_NAME, String s_ADDRESS, Integer s_NATIONKEY,
-                    String s_PHONE, BigDecimal s_ACCTBAL, String s_COMMENT) {
+                    String s_PHONE, Double s_ACCTBAL, String s_COMMENT) {
         S_SUPPKEY = s_SUPPKEY;
         S_NAME = s_NAME;
         S_ADDRESS = s_ADDRESS;
@@ -72,11 +70,11 @@ public class SUPPLIER {
         S_PHONE = s_PHONE;
     }
 
-    public BigDecimal getS_ACCTBAL() {
+    public Double getS_ACCTBAL() {
         return S_ACCTBAL;
     }
 
-    public void setS_ACCTBAL(BigDecimal s_ACCTBAL) {
+    public void setS_ACCTBAL(Double s_ACCTBAL) {
         S_ACCTBAL = s_ACCTBAL;
     }
 

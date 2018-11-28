@@ -1,21 +1,19 @@
 import org.apache.ignite.cache.affinity.AffinityKeyMapped;
 import org.apache.ignite.cache.query.annotations.QuerySqlField;
 
-import java.math.BigDecimal;
-
 public class PARTSUPP {
 
     @AffinityKeyMapped      //Collocated to Lineitem
-    @QuerySqlField (index = true)
+    // This field must not be visible for SQL-Engine, no @QuerySqlField (index = true)
     private PARTSUPP_KEY PS_KEY;        // compound PK (with 2 FK's)
     @QuerySqlField
     private Integer PS_AVAILQTY;
     @QuerySqlField
-    private BigDecimal PS_SUPPLYCOST;
+    private Double PS_SUPPLYCOST;
     @QuerySqlField
     private String PS_COMMENT;
 
-    public PARTSUPP(PARTSUPP_KEY PS_KEY, Integer PS_AVAILQTY, BigDecimal PS_SUPPLYCOST,
+    public PARTSUPP(PARTSUPP_KEY PS_KEY, Integer PS_AVAILQTY, Double PS_SUPPLYCOST,
                     String PS_COMMENT) {
         this.PS_KEY = PS_KEY;
         this.PS_AVAILQTY = PS_AVAILQTY;
@@ -39,11 +37,11 @@ public class PARTSUPP {
         this.PS_AVAILQTY = PS_AVAILQTY;
     }
 
-    public BigDecimal getPS_SUPPLYCOST() {
+    public Double getPS_SUPPLYCOST() {
         return PS_SUPPLYCOST;
     }
 
-    public void setPS_SUPPLYCOST(BigDecimal PS_SUPPLYCOST) {
+    public void setPS_SUPPLYCOST(Double PS_SUPPLYCOST) {
         this.PS_SUPPLYCOST = PS_SUPPLYCOST;
     }
 

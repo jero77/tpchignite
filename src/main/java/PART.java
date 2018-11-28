@@ -1,8 +1,6 @@
 import org.apache.ignite.cache.affinity.AffinityKeyMapped;
 import org.apache.ignite.cache.query.annotations.QuerySqlField;
 
-import java.math.BigDecimal;
-
 
 public class PART {
 
@@ -22,13 +20,13 @@ public class PART {
     @QuerySqlField
     private String P_CONTAINER;
     @QuerySqlField
-    private BigDecimal P_RETAILPRICE;
+    private Double P_RETAILPRICE;
     @QuerySqlField
     private String P_COMMENT;
 
 
     public PART(Integer p_PARTKEY, String p_NAME, String p_MFGR, String p_BRAND, String p_TYPE, Integer p_SIZE,
-                String p_CONTAINER, BigDecimal p_RETAILPRICE, String p_COMMENT) {
+                String p_CONTAINER, Double p_RETAILPRICE, String p_COMMENT) {
         P_PARTKEY = p_PARTKEY;
         P_NAME = p_NAME;
         P_MFGR = p_MFGR;
@@ -96,11 +94,11 @@ public class PART {
         P_CONTAINER = p_CONTAINER;
     }
 
-    public BigDecimal getP_RETAILPRICE() {
+    public Double getP_RETAILPRICE() {
         return P_RETAILPRICE;
     }
 
-    public void setP_RETAILPRICE(BigDecimal p_RETAILPRICE) {
+    public void setP_RETAILPRICE(Double p_RETAILPRICE) {
         P_RETAILPRICE = p_RETAILPRICE;
     }
 
