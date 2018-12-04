@@ -10,7 +10,7 @@ public class SUPPLIER {
     private String S_NAME;
     @QuerySqlField
     private String S_ADDRESS;
-    @QuerySqlField
+    @QuerySqlField (index = true)
     private Integer S_NATIONKEY;        //FK
     @QuerySqlField
     private String S_PHONE;

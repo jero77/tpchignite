@@ -10,7 +10,7 @@ public class CUSTOMER {
     private String C_NAME;
     @QuerySqlField
     private String C_ADDRESS;
-    @QuerySqlField
+    @QuerySqlField (index = true)
     private Integer C_NATIONKEY;    //FK
     @QuerySqlField
     private String C_PHONE;

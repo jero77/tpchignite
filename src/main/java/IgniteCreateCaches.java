@@ -24,7 +24,7 @@ public class IgniteCreateCaches {
         ArrayList<CacheConfiguration> configs = new ArrayList<CacheConfiguration>();
 
         // CUSTOMER Cache
-        CacheConfiguration cacheConfig = new CacheConfiguration("CUSTOMER");
+        CacheConfiguration<?, ?> cacheConfig = new CacheConfiguration("CUSTOMER");
         cacheConfig.setBackups(0)
                 .setCacheMode(CacheMode.PARTITIONED)
                 //.setTypes(Integer.class, CUSTOMER.class)
@@ -106,15 +106,14 @@ public class IgniteCreateCaches {
     }
 
 
-
     private void populateTables(HashMap<String, IgniteCache> cacheMap) {
 
         BufferedReader reader = null;
-        String line = null;
         String pathPrefix = "/home/dbuser/Desktop/tpchdaten/TblFiles/";
         try {
 
             int counter = 0;
+            String line;
 
             // LINEITEM
             reader = new BufferedReader(new FileReader(pathPrefix + "lineitem.tbl"));
@@ -122,12 +121,11 @@ public class IgniteCreateCaches {
                 IgniteCache cache = cacheMap.get("LINEITEM");
                 String[] values = line.split("\\|");
                 LINEITEM_KEY key = new LINEITEM_KEY(Integer.parseInt(values[0]), Integer.parseInt(values[3]));
-                LINEITEM lineitem = new LINEITEM(key, Integer.parseInt(values[1]), Integer.parseInt(values[2]),
+                cache.put(key, new LINEITEM(key, Integer.parseInt(values[1]), Integer.parseInt(values[2]),
                         Double.parseDouble(values[4]), Double.parseDouble(values[5]), Double.parseDouble(values[6]),
                         Double.parseDouble(values[7]), values[8], values[9], Timestamp.valueOf(values[10]+ " 00:00:00"),
                         Timestamp.valueOf(values[11] + " 00:00:00"), Timestamp.valueOf(values[12] + " 00:00:00"),
-                        values[13], values[14], values[15]);
-                cache.put(key, lineitem);
+                        values[13], values[14], values[15]));
                 counter++;
             }
             System.out.println("Populated LINEITEM-Cache! Put " + counter + " entries!");
@@ -139,10 +137,10 @@ public class IgniteCreateCaches {
             while ((line = reader.readLine()) != null) {
                 IgniteCache cache = cacheMap.get("ORDERS");
                 String[] values = line.split("\\|");
-                ORDERS orders = new ORDERS(Integer.parseInt(values[0]), Integer.parseInt(values[1]), values[2],
-                        Double.parseDouble(values[3]), Timestamp.valueOf(values[4] + " 00:00:00"), values[5], values[6],
-                        Integer.parseInt(values[7]), values[8]);
-                cache.put(orders.getO_ORDERKEY(), orders);
+                Integer key = Integer.parseInt(values[0]);
+                cache.put(key ,new ORDERS(key, Integer.parseInt(values[1]), values[2], Double.parseDouble(values[3]),
+                        Timestamp.valueOf(values[4] + " 00:00:00"), values[5], values[6],
+                        Integer.parseInt(values[7]), values[8]));
                 counter++;
             }
             System.out.println("Populated ORDERS-Cache! Put " + counter + " entries!");
@@ -154,9 +152,9 @@ public class IgniteCreateCaches {
             while ((line = reader.readLine()) != null) {
                 IgniteCache cache = cacheMap.get("CUSTOMER");
                 String[] values = line.split("\\|");
-                CUSTOMER customer = new CUSTOMER(Integer.parseInt(values[0]) , values[1], values[2],
-                        Integer.parseInt(values[3]), values[4], Double.parseDouble(values[5]), values[6], values[7]);
-                cache.put(customer.getC_CUSTKEY(), customer);
+                Integer key = Integer.parseInt(values[0]);
+                cache.put(key, new CUSTOMER(key, values[1], values[2], Integer.parseInt(values[3]),
+                        values[4], Double.parseDouble(values[5]), values[6], values[7]));
                 counter++;
             }
             System.out.println("Populated CUSTOMER-Cache! Put " + counter + " entries!");
@@ -169,9 +167,8 @@ public class IgniteCreateCaches {
                 IgniteCache cache = cacheMap.get("PARTSUPP");
                 String[] values = line.split("\\|");
                 PARTSUPP_KEY key = new PARTSUPP_KEY(Integer.parseInt(values[0]), Integer.parseInt(values[1]));
-                PARTSUPP partsupp = new PARTSUPP(key, Integer.parseInt(values[2]), Double.parseDouble(values[3]),
-                        values[4]);
-                cache.put(key, partsupp);
+                cache.put(key, new PARTSUPP(key, Integer.parseInt(values[2]), Double.parseDouble(values[3]),
+                        values[4]));
                 counter++;
             }
             System.out.println("Populated PARTSUPP-Cache! Put " + counter + " entries!");
@@ -183,9 +180,9 @@ public class IgniteCreateCaches {
             while ((line = reader.readLine()) != null) {
                 IgniteCache cache = cacheMap.get("PART");
                 String[] values = line.split("\\|");
-                PART part = new PART(Integer.parseInt(values[0]), values[1], values[2], values[3], values[4],
-                        Integer.parseInt(values[5]), values[6], Double.parseDouble(values[7]), values[8]);
-                cache.put(part.getP_PARTKEY(), part);
+                Integer key = Integer.parseInt(values[0]);
+                cache.put(key, new PART(key, values[1], values[2], values[3], values[4],
+                        Integer.parseInt(values[5]), values[6], Double.parseDouble(values[7]), values[8]));
                 counter++;
             }
             System.out.println("Populated PART-Cache! Put " + counter + " entries!");
@@ -197,9 +194,9 @@ public class IgniteCreateCaches {
             while ((line = reader.readLine()) != null) {
                 IgniteCache cache = cacheMap.get("SUPPLIER");
                 String[] values = line.split("\\|");
-                SUPPLIER supplier = new SUPPLIER(Integer.parseInt(values[0]), values[1], values[2],
-                        Integer.parseInt(values[3]), values[4], Double.parseDouble(values[5]), values[6]);
-                cache.put(supplier.getS_SUPPKEY(), supplier);
+                Integer key = Integer.parseInt(values[0]);
+                cache.put(key, new SUPPLIER(key, values[1], values[2], Integer.parseInt(values[3]),
+                        values[4], Double.parseDouble(values[5]), values[6]));
                 counter++;
             }
             System.out.println("Populated SUPPLIER-Cache! Put " + counter + " entries!");
@@ -212,8 +209,8 @@ public class IgniteCreateCaches {
             while ((line = reader.readLine()) != null) {
                 IgniteCache cache = cacheMap.get("REGION");
                 String[] values = line.split("\\|");
-                REGION region = new REGION(Integer.parseInt(values[0]), values[1], values[2]);
-                cache.put(region.getR_REGIONKEY(), region);
+                Integer key = Integer.parseInt(values[0]);
+                cache.put(key, new REGION(key, values[1], values[2]));
                 counter++;
             }
             System.out.println("Populated REGION-Cache! Put " + counter + " entries!");
@@ -225,9 +222,9 @@ public class IgniteCreateCaches {
             while ((line = reader.readLine()) != null) {
                 IgniteCache cache = cacheMap.get("NATION");
                 String[] values = line.split("\\|");
-                NATION nation = new NATION(Integer.parseInt(values[0]), values[1], Integer.parseInt(values[2]),
-                        values[3]);
-                cache.put(nation.getN_NATIONKEY(), nation);
+                Integer key = Integer.parseInt(values[0]);
+                cache.put(key, new NATION(key, values[1], Integer.parseInt(values[2]),
+                        values[3]));
                 counter++;
             }
             System.out.println("Populated NATION-Cache! Put " + counter + " entries!");

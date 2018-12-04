@@ -6,9 +6,9 @@ public class LINEITEM {
 
     // This field must be invisible to SQL-Engine so no @QuerySqlField
     private LINEITEM_KEY L_KEY;     //Compound PK
-    @QuerySqlField
+    @QuerySqlField (orderedGroups = {@QuerySqlField.Group(name = "lineitem_foreign_key_idx", order = 0)})
     private Integer L_PARTKEY;      //Compound FK with SUPPKEY
-    @QuerySqlField
+    @QuerySqlField (orderedGroups = {@QuerySqlField.Group(name = "lineitem_foreign_key_idx", order = 1)})
     private Integer L_SUPPKEY;      //FK
 
     @QuerySqlField

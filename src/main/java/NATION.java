@@ -8,7 +8,7 @@ public class NATION {
     @QuerySqlField
     private String N_NAME;
     @AffinityKeyMapped      // collocated to REGION
-    @QuerySqlField
+    @QuerySqlField (index = true)
     private Integer N_REGIONKEY;        //FK
     @QuerySqlField
     private String N_COMMENT;

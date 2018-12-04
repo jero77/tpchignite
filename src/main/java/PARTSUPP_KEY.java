@@ -2,9 +2,10 @@ import org.apache.ignite.cache.query.annotations.QuerySqlField;
 
 public class PARTSUPP_KEY {
 
-    @QuerySqlField
+    //  Both are indexed seperately and once together as index on FK
+    @QuerySqlField (index = true, orderedGroups = {@QuerySqlField.Group(name = "partsupp_foreign_key_idx", order = 0)})
     private Integer PS_PARTKEY;     //PK & FK   (compound PK)
-    @QuerySqlField
+    @QuerySqlField (index = true, orderedGroups = {@QuerySqlField.Group(name = "partsupp_foreign_key_idx", order = 1)})
     private Integer PS_SUPPKEY;     //PK & FK
 
 

@@ -3,9 +3,9 @@ import org.apache.ignite.cache.query.annotations.QuerySqlField;
 public class LINEITEM_KEY {
 
 
-    @QuerySqlField
+    @QuerySqlField (orderedGroups = {@QuerySqlField.Group(name="lineitem_key_idx", order=0)})
     private Integer L_ORDERKEY;
-    @QuerySqlField
+    @QuerySqlField (orderedGroups = {@QuerySqlField.Group(name="lineitem_key_idx", order=1)})
     private Integer L_LINENUMBER;
 
 

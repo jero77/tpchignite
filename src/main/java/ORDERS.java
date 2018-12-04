@@ -8,7 +8,7 @@ public class ORDERS {
     @AffinityKeyMapped      // Collocated to Lineitem
     @QuerySqlField (index = true)
     private Integer O_ORDERKEY;         //PK
-    @QuerySqlField
+    @QuerySqlField (index = true)
     private Integer O_CUSTKEY;          //FK
     @QuerySqlField
     private String O_ORDERSTATUS;

@@ -4,8 +4,7 @@ import org.apache.ignite.cache.query.annotations.QuerySqlField;
 public class PARTSUPP {
 
     @AffinityKeyMapped      //Collocated to Lineitem
-    // This field must not be visible for SQL-Engine, no @QuerySqlField (index = true)
-    private PARTSUPP_KEY PS_KEY;        // compound PK (with 2 FK's)
+    private PARTSUPP_KEY PS_KEY;        // compound PK (with 2 FK's), This field must not be visible for SQL-Engine
     @QuerySqlField
     private Integer PS_AVAILQTY;
     @QuerySqlField
